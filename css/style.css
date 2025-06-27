@@ -1,5 +1,5 @@
 body {
-  background-color: gainsboro;
+  background-image: url(https://i.imgur.com/APbeHzH.jpeg);
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -10,15 +10,21 @@ body {
 h1 {
   font-family: Segoe Script, Papyrus, sans-serif;
   font-size: 50px;
+  background-color: #1c1e3d;
+  border: solid 10px #FFFFFF;
+  border-radius: 30px;
+  padding: 20px;
+  color: #FFFFFF;
+  
 }
 
 #message {
   font-family: Ink Free, Skia, sans-serif;
   font-size: 40px;
+  color: #FFFFFF;
 }
 
 .board {
-  font-family: system-ui, sans-serif;
   display: flex;
   flex-wrap: wrap;
   width: 325px;
@@ -26,12 +32,14 @@ h1 {
 }
 
 .sqr {
+  font-family: Segoe Script, Papyrus, sans-serif;
   width: 30%;
   aspect-ratio: 1/1;
-  border: 3px solid black;
+  border: 3px solid #FFFFFF;
   border-radius: 20%;
-  font-size: 64px;
+  font-size: 58px;
   text-align: center;
+  background-color: #65689c;
 }
 
 .sqr:hover {
@@ -42,22 +50,22 @@ h1 {
   margin: 25px;
   border: ridge;
   border-radius: 20%;
-  border-color: #006600;
+  border-color: #FFFFFF;
   padding: 10px 20px;
-  background-color: #2DB300;
-  color: #FFFF00;
+  background-color: #1c1e3d;
+  color: #FFFFFF;
   -webkit-text-stroke: 1px #000000; /* Adds outline around text */
   font-size: 24px;
   font-family: Impact, sans-serif;
-  box-shadow: 0 5px #006600; /* Adds a shadow effect on the vertical offset so it looks 3D */
+  box-shadow: 0 5px #65689c; /* Adds a shadow effect on the vertical offset so it looks 3D */
 }
 
 #reset:hover {
-  background-color: #006600;
+  background-color: #65689c;
   cursor: pointer;
 }
 
 #reset:active {
-  box-shadow: 0 2px #006600; /* Box shadow becomes 2px when button is clicked */
+  box-shadow: 0 2px #65689c; /* Box shadow becomes 2px when button is clicked */
   transform: translateY(3px); /* Moves button down vertically 3px */
 }
