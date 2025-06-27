@@ -1,18 +1,28 @@
-//1) Define the required variables used to track the state of the game.
+/*-------------------------------- Constants --------------------------------*/
+const winningCombos = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+]
+
+/*-------------------------------- Variables --------------------------------*/
 let board;
 let turn;
 let winner;
 let tie;
 
-//2) Store cached element references.
+/*------------------------ Cached Element References ------------------------*/
 const squareEls = document.querySelectorAll('.sqr')
 const messageEl = document.querySelector('#message')
 const ticTacToeBoard = document.querySelector('.board')
 const resetBtnEl = document.querySelector('#reset')
 
-
-//3) Upon loading, the game state should be initialized, and a function should 
-//   be called to render this game state.
+/*-------------------------------- Functions --------------------------------*/
 function init() {
     board = ["", "", "", "", "", "", "", "", ""];
     turn = 'X';
@@ -21,13 +31,11 @@ function init() {
     squareEls.forEach((square) => {
         square.style.backgroundColor = '';
         square.style.color = ''
+        square.style.borderColor = '';
     })
     render();
 }
 
-document.addEventListener('DOMContentLoaded', init);
-
-//4) The state of the game should be rendered to the user.
 function render() {
     updateBoard()
     updateMessage()
@@ -49,19 +57,6 @@ const updateMessage = () => {
     }
 }
 
-//5) Define the required constants.
-const winningCombos = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-]
-
-//6) Handle a player clicking a square with a `handleClick` function.
 const handleClick = (event) => {
     const squareIndex = event.target.id;
     if (event.target.textContent === 'X' || event.target.textContent === 'O' || winner || !event.target.classList.contains('sqr')) {
@@ -74,8 +69,6 @@ const handleClick = (event) => {
     render();
 }
 
-ticTacToeBoard.addEventListener('click', handleClick)
-
 const placePiece = (index) => {
     board[index] = turn;
 }
@@ -84,9 +77,9 @@ const checkForWinner = () => {
     winningCombos.forEach((combo) => {
         if (board[combo[0]] !== '' && board[combo[0]] === board[combo[1]] && board[combo[0]] === board[combo[2]]) {
             winner = true;
-            squareEls.forEach((square) => {
-                square.style.border.color = 'gold' 
-            })
+            for (let i = 0; i < combo.length; i++) {
+                document.getElementById(combo[i]).style.borderColor = '#FFD700'; /* Creates a gold border around the winning squares */ 
+            }
         }
     })
 }
@@ -110,9 +103,13 @@ const switchPlayerTurn = () => {
         }
     }
 }
-//7) Create Reset functionality.
+
+/*----------------------------- Event Listeners -----------------------------*/
+document.addEventListener('DOMContentLoaded', init);
+ticTacToeBoard.addEventListener('click', handleClick)
 resetBtnEl.addEventListener('click', init)
 
+// Just to add a little color to the board
 squareEls.forEach((square) => {
     square.addEventListener('click', () => {
         if (winner || square.textContent === 'X' || square.textContent === 'O') {
