@@ -1,14 +1,28 @@
 body {
   background-color: gainsboro;
-  /* Use a system font, if none are available use an available sans-sarif */
-  font-family: system-ui, sans-serif;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  font-family: Segoe Script, Papyrus, sans-serif;
+  font-size: 50px;
+}
+
+#message {
+  font-family: Ink Free, Skia, sans-serif;
+  font-size: 40px;
 }
 
 .board {
+  font-family: system-ui, sans-serif;
   display: flex;
   flex-wrap: wrap;
   width: 325px;
+  gap: 0.25rem 0.25rem;
 }
 
 .sqr {
@@ -17,4 +31,32 @@ body {
   border: 3px solid black;
   font-size: 64px;
   text-align: center;
+}
+
+.sqr:hover {
+  background-color: rgba(213,248,255, 0.5);
+}
+
+#reset {
+  margin: 25px;
+  border: ridge;
+  border-radius: 20%;
+  border-color: #006600;
+  padding: 10px 20px;
+  background-color: #2DB300;
+  color: #FFFF00;
+  -webkit-text-stroke: 1px #000000; /* Adds outline around text */
+  font-size: 24px;
+  font-family: Impact, sans-serif;
+  box-shadow: 0 5px #006600; /* Adds a shadow effect on the vertical offset so it looks 3D */
+}
+
+#reset:hover {
+  background-color: #006600;
+  cursor: pointer;
+}
+
+#reset:active {
+  box-shadow: 0 2px #006600; /* Box shadow becomes 2px when button is clicked */
+  transform: translateY(3px); /* Moves button down vertically 3px */
 }

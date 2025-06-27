@@ -7,6 +7,7 @@ let tie;
 //2) Store cached element references.
 const squareEls = document.querySelectorAll('.sqr')
 const messageEl = document.querySelector('#message')
+const ticTacToeBoard = document.querySelector('.board')
 const resetBtnEl = document.querySelector('#reset')
 
 
@@ -17,6 +18,10 @@ function init() {
     turn = 'X';
     winner = false;
     tie = false; 
+    squareEls.forEach((square) => {
+        square.style.backgroundColor = '';
+        square.style.color = ''
+    })
     render();
 }
 
@@ -30,7 +35,7 @@ function render() {
 
 const updateBoard = () => {
     board.forEach((square, index) => {
-        squareEls[index].textContent = board[index];
+        squareEls[index].textContent = square;
     })
 }
 
@@ -59,7 +64,7 @@ const winningCombos = [
 //6) Handle a player clicking a square with a `handleClick` function.
 const handleClick = (event) => {
     const squareIndex = event.target.id;
-    if (event.target.textContent === 'X' || event.target.textContent === 'O' || winner) {
+    if (event.target.textContent === 'X' || event.target.textContent === 'O' || winner || !event.target.classList.contains('sqr')) {
         return;
     }
     placePiece(squareIndex);
@@ -69,9 +74,7 @@ const handleClick = (event) => {
     render();
 }
 
-squareEls.forEach((square) => {
-    square.addEventListener('click', handleClick)
-})
+ticTacToeBoard.addEventListener('click', handleClick)
 
 const placePiece = (index) => {
     board[index] = turn;
@@ -79,8 +82,11 @@ const placePiece = (index) => {
 
 const checkForWinner = () => {
     winningCombos.forEach((combo) => {
-        if (board[combo[0]] !== '' && board[combo[0]] === board[combo[1]] && board[combo[1]] === board[combo[2]]) {
+        if (board[combo[0]] !== '' && board[combo[0]] === board[combo[1]] && board[combo[0]] === board[combo[2]]) {
             winner = true;
+            squareEls.forEach((square) => {
+                square.style.border.color = 'gold' 
+            })
         }
     })
 }
@@ -106,3 +112,18 @@ const switchPlayerTurn = () => {
 }
 //7) Create Reset functionality.
 resetBtnEl.addEventListener('click', init)
+
+squareEls.forEach((square) => {
+    square.addEventListener('click', () => {
+        if (winner || square.textContent === 'X' || square.textContent === 'O') {
+            return;
+        }
+        if (turn === 'X') {
+            square.style.backgroundColor = '#800020';
+            square.style.color = '#F8DEFF';
+        } else {
+            square.style.backgroundColor = '#000080';
+            square.style.color = '#FDBE02';
+        }
+    })
+})
